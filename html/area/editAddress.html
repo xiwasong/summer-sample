@@ -1,0 +1,31 @@
+@extends("/main_template")
+@import summer.sample.area.db.*
+@args Address address
+
+<blockquote class="layui-elem-quote">
+    修改功能
+</blockquote>
+<div class="layui-form-item">
+    <label class="layui-form-label">addressId</label>
+    <div class="layui-input-block">
+        <input type="text" name="addressId" value="@address.getAddressId()" readonly="readonly" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">address</label>
+    <div class="layui-input-block">
+        <input type="text" name="address" value="@address.getAddress()" lay-verify="required" autocomplete="off" placeholder="请输入address" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item">
+    <label class="layui-form-label">district</label>
+    <div class="layui-input-block">
+        <input type="text" name="district" value="@address.getDistrict()" lay-verify="required" placeholder="请输入district" autocomplete="off" class="layui-input">
+    </div>
+</div>
+<div class="layui-form-item">
+    <div class="layui-input-block">
+        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+</div>

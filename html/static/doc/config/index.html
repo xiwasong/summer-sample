@@ -1,0 +1,54 @@
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>开始-1.启动类App.java</legend>
+</fieldset>
+<pre class="layui-code">
+@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages={"summer.sample"})
+@Configuration()
+@EnableTransactionManagement
+@EnableAspectJAutoProxy(proxyTargetClass=true)
+public class App extends WebApp
+{
+  public static void main( String[] args )
+  {
+    Config.dbBeanScanFilter=".*sample.*db";//配置建表脚本目录
+    SpringApplication.run(App.class);
+  }
+
+  @Bean
+  public IBeanMapperRule getBeanMapperRule(){
+    return new UnderlinedBeanMapperRule(); //设置下划线风格列名转驼峰属性名
+  }
+}
+</pre>
+
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>2.app工具AppTool.java</legend>
+</fieldset>
+<pre class="layui-code">
+//自动生成实体类
+new EntityGenerator(
+  new UnderlinedBeanMapperRule(""), //列名属性名映射风格
+  new MysqlTypeMapperRule()         //配置为mysql数据类型
+).autoGenEntity("/src/main/java","src/main/resources"); //指定源码和资源目录
+</pre>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>3.配置文件application.properties</legend>
+</fieldset>
+<pre class="layui-code">
+datasource.url=jdbc:mysql://localhost:3306/lott_chart?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+datasource.driverClassName=com.mysql.jdbc.Driver
+datasource.username=root
+datasource.password=123456
+
+logging.path=log
+logging.config=config/logback-spring.xml
+
+#server.port=8080
+server.tomcat.docbase=./html
+#
+template.home=./html
+template.mode=dev
+</pre>

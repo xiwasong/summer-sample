@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>文档首页</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin layui-bg-black">
+    <div class="layui-header header header-demo">
+        <div class="layui-main">
+            <a class="logo site-title" href="/">
+                文档首页
+            </a>
+            <ul class="layui-nav" pc="">
+                <li class="layui-nav-item ">
+                    <a href="index.html">文档</a>
+                </li>
+                <li class="layui-nav-item layui-this">
+                    <a href="http://git.oschina.net/xiwa/summer-sample">示例源码</a>
+                </li>
+                <span class="layui-nav-bar"></span></ul>
+        </div>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+
+            <ul class="layui-nav layui-nav-tree site-demo-nav">
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="javascript:;" href="javascript:;">数据库操作<span class="layui-nav-more"></span></a>
+                    <dl class="layui-nav-child">
+                        <dd class="">
+                            <a href="db/query.html">查询</a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item" style="height: 30px; text-align: center"></li>
+                <span class="layui-nav-bar" style="height: 0px; top: 22.5px; opacity: 0;"></span></ul>
+
+        </div>
+    </div>
+    <div class="layui-tab layui-tab-brief" lay-filter="demoTitle" style="margin-left: 200px;">
+        <div id="jsContent" class="layui-body layui-tab-content site-demo">
+        </div>
+    </div>
+    <div class="layui-footer footer footer-demo">
+        <div class="layui-main">
+            <p>
+                <a href="https://git.oschina.net/mgfireworks/mgplatform/tree/dev/" target="_blank">案例</a>
+                <a href="http://git.oschina.net/xiwa/summer" target="_blank">捐赠</a>
+                <a href="http://git.oschina.net/xiwa/summer" target="_blank">Git仓库</a>
+            </p>
+        </div>
+    </div>
+</div>
+<script src="../layui/lay/dest/layui.all.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+      $(".layui-nav-child a").click(function(){
+        $("#jsContent").load($(this).attr("href"));
+        return false;
+      });
+    });
+    $("#jsContent").load("config/index.html");
+</script>
+  @render(script)
+</body>
+</html>

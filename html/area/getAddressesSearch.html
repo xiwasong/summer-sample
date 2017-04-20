@@ -1,0 +1,85 @@
+@extends("/main_template")
+@import summer.sample.area.db.*
+@import cn.hn.java.summer.mvc.*
+@args List<Address> addressList
+
+<div class="layui-form">
+    <blockquote class="layui-elem-quote">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">address</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="address" value="@val("address")" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">district</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="district" value="@val("district")" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" type="submit">查询</button>
+                <a href="addAddress.html" class="layui-btn layui-btn-normal"><i class="layui-icon"></i>添加</a>
+            </div>
+            <input type="hidden" name="page" value="@val("page")"/>
+        </div>
+    </blockquote>
+</div>
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="50">
+            <col width="150">
+            <col width="150">
+            <col width="100">
+            <col>
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+            <th>address</th>
+            <th>district</th>
+            <th>postal_code</th>
+            <th>phone</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if(addressList){
+        @for(Address a : addressList){
+        <tr>
+            <td><input type="checkbox" name="" lay-skin="primary"></td>
+            <td>@a.getAddress()</td>
+            <td>@a.getDistrict()</td>
+            <td>@a.getPostalCode()</td>
+            <td>@a.getPhone()</td>
+            <td>
+                <a href="editAddress.html?addressId=@a.getAddressId()" class="layui-btn layui-btn-primary layui-btn-small"><i class="layui-icon"></i></a>
+                <a target="_blank" href="delAddress.json?addressId=@a.getAddressId()" class="layui-btn layui-btn-danger layui-btn-small"><i class="layui-icon"></i></a>
+            </td>
+        </tr>
+          }}
+        </tbody>
+    </table>
+</div>
+
+<div id="jsPaging"></div>
+@section(script){
+<script type="text/javascript">
+    var laypage = layui.laypage;
+
+    laypage({
+    cont: 'jsPaging'
+            ,pages: Math.ceil(@ViewTools.getRecordTotal(1)/15) //总页数
+            ,curr: @val("page") //获取hash值为fenye的当前页
+            ,jump: function(obj, first){
+    if(!first){
+        location.href="?page="+obj.curr;
+        }
+        }
+        });
+</script>
+}

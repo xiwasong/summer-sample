@@ -1,0 +1,21 @@
+@extends("/area/getAddresses")
+@import summer.sample.area.db.*
+@import cn.hn.java.summer.mvc.*
+@args List<Address> addressList
+<div id="jsPaging"></div>
+@section(script){
+<script type="text/javascript">
+    var laypage = layui.laypage;
+
+    laypage({
+    cont: 'jsPaging'
+            ,pages: Math.ceil(@ViewTools.getRecordTotal(1)/15) //总页数
+            ,curr: @val("page") //获取hash值为fenye的当前页
+            ,jump: function(obj, first){
+                if(!first){
+                    location.href="?page="+obj.curr;
+                }
+            }
+        });
+</script>
+}

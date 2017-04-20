@@ -1,0 +1,36 @@
+@extends("/main_template")
+@import summer.sample.area.db.*
+@args List<Address> addressList
+<div class="layui-form">
+    <table class="layui-table">
+        <colgroup>
+            <col width="50">
+            <col width="150">
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+            <th>address</th>
+            <th>district</th>
+            <th>postal_code</th>
+            <th>phone</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if(addressList){
+        @for(Address a : addressList){
+        <tr>
+            <td><input type="checkbox" name="" lay-skin="primary"></td>
+            <td>@a.getAddress()</td>
+            <td>@a.getDistrict()</td>
+            <td>@a.getPostalCode()</td>
+            <td>@a.getPhone()</td>
+        </tr>
+          }}
+        </tbody>
+    </table>
+</div>
+@render()

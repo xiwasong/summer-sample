@@ -1,0 +1,36 @@
+    1.一个最简单的列表查询：
+    <pre class="layui-code">
+@Autowired
+BaseDao baseDao;
+
+public List&lt;Address&gt; getAddresses(){
+    return baseDao.list(Address.class);
+}
+    </pre>
+    2.带条件的查询：
+    <pre class="layui-code">
+@Autowired
+BaseDao baseDao;
+
+public List&lt;Address&gt; getAddresses(Address a){
+    return baseDao.list(Address.class,a);
+}
+    </pre>
+    3.分页查询：
+    <pre class="layui-code">
+@Controller
+@RequestMapping("/area")
+public class AreaController {
+    @Autowired
+    BaseDao baseDao;
+
+    @RequestMapping("/getAddresses")
+    public List&lt;Address&gt; getAddresses(){
+        return baseDao.list(Address.class);
+    }
+}
+//访问area/getAddresses.json?page=1
+    </pre>
+<script type="text/javascript">
+    layui.code();
+</script>

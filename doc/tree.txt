@@ -1,0 +1,30 @@
+├─config 						//配置文件目录
+│  ├─application.properties 				//主配置文件
+│  ├─logback-spring.xml 				//日志配置  
+├─html 						//页面目录
+│  ├─index.html 					//首页
+│  ├─main_template.html 				//页面模板
+│  ├─statc 						//静态资源目录
+│  ├─area 						//业务模块area 
+│  └─static 						//静态资源目录
+└─src
+    └─main
+        ├─java
+        │  ├─main
+        │  ├─App.java 				//应用启动类
+        │  ├─AppTool.java 				//工具应用启动类 
+        │  └─summer
+        │      └─sample
+        │          ├─MainController.java		//主控制器类
+        │          ├─ControllerAspect.java		//控制器拦截处理类
+        │          └─area
+        │              ├─db 				//自动生成实体类目录
+        │              │  └─Address.java 		//自动生成的实体类
+        │              ├─model			//业务模型目录
+        │              └─AreaController.java		//业务Area控制器类(这里简化了没加service类)
+        └─resources					//资源目录
+            └─summer
+                └─sample
+                    └─area
+                        └─db
+                            └─Address_create.sql	//建表脚本(类名_create.sql)

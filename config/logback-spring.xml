@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
+<configuration scan="true" scanPeriod="10 seconds">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">  
+	    <encoder>  
+	      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>  
+	    </encoder>  
+  	</appender> 
+
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}/log.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天压缩前天的日志，压缩为gz格式 -->
+            <fileNamePattern>${LOG_PATH}/log-%d{yyyyMMdd}.%i.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- 多大空间分割日志 -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 最大保存文件数 -->
+            <maxHistory>400</maxHistory> 
+
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+	<logger name="org.springframework" additivity="false">  
+        <level value="INFO" />  
+        <appender-ref ref="STDOUT"/>  
+        <appender-ref ref="INFO_FILE"/>  
+    </logger> 
+    
+	<logger name="org.rythmengine" additivity="false">  
+        <level value="INFO" />  
+        <appender-ref ref="STDOUT"/>  
+        <appender-ref ref="INFO_FILE"/>  
+    </logger>  
+
+    <root level="DEBUG">
+        <appender-ref ref="INFO_FILE" />
+    	<appender-ref ref="STDOUT" />  
+    </root>
+    
+</configuration>
